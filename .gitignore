@@ -20,3 +20,6 @@ npm-debug.*
 
 # Ignoring fonts
 **/fonts/
+
+# Design assets
+design_assets/
