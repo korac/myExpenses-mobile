@@ -29,6 +29,10 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "lint": "eslint --quiet --fix src/",
+    "dist:android": "npm version patch && npm run build:android",
+    "dist:android:sprint": "npm version minor && npm run build:android",
+    "build:android": "expo build:android"
   }
 }
