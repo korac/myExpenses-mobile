@@ -23,3 +23,6 @@ npm-debug.*
 
 # Design assets
 design_assets/
+
+# Keystores
+.keystores
