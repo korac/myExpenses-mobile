@@ -31,8 +31,8 @@
     "ios": "expo start --ios",
     "eject": "expo eject",
     "lint": "eslint --quiet --fix src/",
-    "postversion": "git add package.json package-lock.json && git commit -mv$npm_package_version && git push",
-    "dist:android": "npm version patch -mv$npm_package_version",
+    "postversion": "git push",
+    "dist:android": "npm version patch -m \"v%s\"",
     "dist:android:sprint": "npm version minor -mv$npm_package_version && npm run build:android",
     "build:android": "expo build:android"
   }
