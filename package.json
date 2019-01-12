@@ -1,6 +1,6 @@
 {
   "name": "myexpenses-mobile",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "private": true,
   "description": "MyExpenses react native app.",
   "author": "MyExpenses <korac.kristijan@gmail.com>",
