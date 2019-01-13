@@ -7,6 +7,7 @@
     "privacy": "public",
     "githubUrl": "https://github.com/korac/myExpenses-mobile",
     "sdkVersion": "31.0.0",
+    "entryPoint": "./components/App/index",
     "platforms": [
       "ios",
       "android"
