@@ -3,9 +3,26 @@ import React, { Component } from 'react';
 import { Text, View, StatusBar } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
+import MeHeader from '../Shared/MeHeader';
 import HomeScreen from '../HomeScreen';
 import ExpensesScreen from '../ExpensesScreen';
 import styles from './App.styles';
+
+const AppNavigator = createStackNavigator(
+  {
+    Expenses: {
+      screen: ExpensesScreen,
+      navigationOptions: ({ navigation }) => ({
+        header: HeaderProps => <MeHeader {...HeaderProps} title="EXPENSES" />
+      })
+    }
+  },
+  {
+    initialRouteName: 'Expenses'
+  }
+);
+
+const AppContainer = createAppContainer(AppNavigator);
 
 class App extends Component {
   constructor(props) {
@@ -32,22 +49,8 @@ class App extends Component {
   render() {
     const { fontLoaded } = this.state;
 
-    return fontLoaded ? (
-      <View style={styles.appContainer}>
-        <View style={[styles.appHeader, { height: 56 + StatusBar.currentHeight, paddingTop: StatusBar.currentHeight }]}>
-          <Text style={styles.text}>{this.state.header}</Text>
-        </View>
-        <View style={styles.appMainContent} />
-      </View>
-    ) : null;
+    return fontLoaded ? <AppContainer /> : null;
   }
 }
-
-// const AppNavigator = createStackNavigator({
-//   Home: { screen: HomeScreen },
-//   Expenses: { screen: ExpensesScreen }
-// });
-//
-// const App = createAppContainer(AppNavigator);
 
 export default Expo.registerRootComponent(App);

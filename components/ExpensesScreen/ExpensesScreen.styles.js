@@ -2,6 +2,13 @@ import { StyleSheet } from 'react-native';
 import { myExpensesPurple } from '../../assets/shared-styles/general';
 
 const styles = StyleSheet.create({
+  headerStyle: {
+    backgroundColor: myExpensesPurple
+  },
+  appContainer: {
+    flex: 1,
+    backgroundColor: '#f9fbfc'
+  },
   button: {
     display: 'flex',
     alignItems: 'center',
