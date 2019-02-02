@@ -9,6 +9,10 @@ const styles = StyleSheet.create({
     height: 56,
     backgroundColor: myExpensesPurple
   },
+  headerMenu: {
+    position: 'absolute',
+    left: 18
+  },
   headerText: {
     color: '#fff',
     fontFamily: circularBlack,
