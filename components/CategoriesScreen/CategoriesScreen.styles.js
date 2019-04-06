@@ -6,26 +6,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f9fbfc'
   },
-  expenseItem: {
+  categoryItem: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderBottomColor: 'rgba(0, 0, 0, 0.1)',
     borderBottomWidth: 1,
-    paddingTop: 8,
-    paddingBottom: 8,
+    paddingTop: 12,
+    paddingBottom: 12,
     paddingLeft: 14,
     paddingRight: 14
   },
-  expenseAmount: {
-    fontSize: 42
-  },
-  expenseCurrency: {
-    fontSize: 14
-  },
-  expenseDate: {
-    color: black3,
-    fontSize: 16
+  categoryName: {
+    fontSize: 24
   },
   fab: {
     display: 'flex',
