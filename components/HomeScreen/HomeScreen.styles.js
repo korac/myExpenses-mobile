@@ -4,7 +4,8 @@ import { myExpensesPurple } from '../../assets/shared-styles/general';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: '#f9fbfc'
   },
   button: {
     width: 44,

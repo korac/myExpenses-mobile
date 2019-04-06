@@ -2,9 +2,6 @@ import { StyleSheet } from 'react-native';
 import { myExpensesPurple, circularMedium, black1, black3 } from '../../assets/shared-styles/general';
 
 const styles = StyleSheet.create({
-  // headerStyle: {
-  //   backgroundColor: myExpensesPurple
-  // },
   appContainer: {
     flex: 1,
     backgroundColor: '#f9fbfc'
@@ -23,21 +20,29 @@ const styles = StyleSheet.create({
   expenseAmount: {
     fontSize: 42
   },
+  expenseCurrency: {
+    fontSize: 14
+  },
   expenseDate: {
     color: black3,
     fontSize: 16
   },
-  button: {
+  fab: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: 72,
-    height: 72,
-    borderRadius: 36,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
     position: 'absolute',
-    bottom: 26,
-    right: 26,
-    backgroundColor: myExpensesPurple
+    bottom: 18,
+    right: 18,
+    backgroundColor: myExpensesPurple,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 5
   }
 });
 

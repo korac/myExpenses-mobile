@@ -1,26 +1,8 @@
 import Expo, { Font } from 'expo';
 import React, { Component } from 'react';
-import { Text, View, StatusBar } from 'react-native';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { createAppContainer } from 'react-navigation';
 
-import MeHeader from '../Shared/MeHeader';
-import HomeScreen from '../HomeScreen';
-import ExpensesScreen from '../ExpensesScreen';
-import styles from './App.styles';
-
-const AppNavigator = createStackNavigator(
-  {
-    Expenses: {
-      screen: ExpensesScreen,
-      navigationOptions: ({ navigation }) => ({
-        header: HeaderProps => <MeHeader {...HeaderProps} title="EXPENSES" />
-      })
-    }
-  },
-  {
-    initialRouteName: 'Expenses'
-  }
-);
+import AppNavigator from './AppNavigator';
 
 const AppContainer = createAppContainer(AppNavigator);
 
