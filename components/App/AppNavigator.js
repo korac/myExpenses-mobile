@@ -2,8 +2,9 @@ import React from 'react';
 import { createStackNavigator, createDrawerNavigator, SafeAreaView, DrawerItems } from 'react-navigation';
 import { ScrollView } from 'react-native';
 
-import HomeScreen from '../HomeScreen/HomeScreen';
+import HomeScreen from '../HomeScreen';
 import ExpensesScreen from '../ExpensesScreen';
+import CategoriesScreen from '../CategoriesScreen';
 import { myExpensesPurple } from '../../assets/shared-styles/general';
 import { circularBlack } from '../../assets/shared-styles/general';
 import styles from './App.styles';
@@ -24,6 +25,8 @@ const HomeNavigator = createStackNavigator({ Home: HomeScreen }, { ...navigatorO
 
 const ExpensesNavigator = createStackNavigator({ Expenses: ExpensesScreen }, { ...navigatorOptions });
 
+const CategoriesNavigator = createStackNavigator({ Categories: CategoriesScreen }, { ...navigatorOptions });
+
 const CustomDrawerContentComponent = props => (
   <ScrollView style={styles.drawerScrollView}>
     <SafeAreaView style={styles.drawerContainer} forceInset={{ top: 'always', horizontal: 'never' }}>
@@ -43,7 +46,8 @@ const CustomDrawerContentComponent = props => (
 const AppNavigator = createDrawerNavigator(
   {
     Home: HomeNavigator,
-    Expenses: ExpensesNavigator
+    Expenses: ExpensesNavigator,
+    Categories: CategoriesNavigator
   },
   {
     contentComponent: CustomDrawerContentComponent
