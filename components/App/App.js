@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import { createAppContainer } from 'react-navigation';
 
 import AppNavigator from './AppNavigator';
+import AuthContainer from '../AuthNavigator';
 
-const AppContainer = createAppContainer(AppNavigator);
+// const AppContainer = createAppContainer(AppNavigator);
 
 class App extends Component {
   constructor(props) {
@@ -31,7 +32,7 @@ class App extends Component {
   render() {
     const { fontLoaded } = this.state;
 
-    return fontLoaded ? <AppContainer /> : null;
+    return fontLoaded ? <AuthContainer /> : null;
   }
 }
 
