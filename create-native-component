@@ -1,0 +1,46 @@
+#!/bin/bash
+
+name=$1
+component_path=$2
+dirpath=$PWD
+
+if [[ $# -eq 0 ]]; then
+	echo "Please provide component name and its path"
+	exit 0
+elif [[ $# -eq 1 ]]; then
+	echo "Please provide both component name and its path"
+	exit 0
+fi
+
+echo Creating $name component...
+cd $dirpath/components/$component_path
+mkdir $name && cd $_
+touch index.js $name.js $name.styles.js
+
+echo "import ${name} from './${name}'"$'\n' >> index.js
+echo "export default ${name}" >> index.js
+
+echo "import React, { Component } from 'react';" >> $name.js
+echo "import { Text, View } from 'react-native';"$'\n' >> $name.js
+echo "import styles from './${name}.styles';"$'\n' >> $name.js
+
+echo "class ${name} extends Component {
+  render() {
+    return (
+      <View>
+        <Text>${name}</Text>
+      </View>
+    );
+  }
+}"$'\n' >> $name.js
+
+echo "export default ${name};" >> $name.js
+
+
+echo "import { StyleSheet } from 'react-native';
+
+const styles = StyleSheet.create({});
+
+export default styles;" >> $name.styles.js
+
+echo done!

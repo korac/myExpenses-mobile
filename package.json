@@ -1,14 +1,18 @@
 {
   "name": "myexpenses-mobile",
-  "version": "0.0.0",
+  "version": "0.0.15",
   "private": true,
   "description": "MyExpenses react native app.",
   "author": "MyExpenses <korac.kristijan@gmail.com>",
   "main": "node_modules/expo/AppEntry.js",
   "dependencies": {
+    "axios": "^0.18.0",
     "expo": "^31.0.2",
+    "moment": "^2.24.0",
     "react": "16.5.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz"
+    "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
+    "react-native-config": "^0.11.7",
+    "react-navigation": "^3.0.9"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0",
@@ -28,6 +32,11 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "lint": "eslint --quiet --fix src/",
+    "postversion": "git push && git push --tags",
+    "dist:android": "npm version patch -m \"v%s\" && npm run build:android",
+    "dist:android:sprint": "npm version minor -m \"v%s\" && npm run build:android",
+    "build:android": "expo build:android"
   }
 }
