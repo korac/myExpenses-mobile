@@ -1,6 +1,7 @@
 import React from 'react';
 import { createStackNavigator, createDrawerNavigator, SafeAreaView, DrawerItems } from 'react-navigation';
-import { ScrollView } from 'react-native';
+import { ScrollView, View, Text, Alert } from 'react-native';
+import { SecureStore } from 'expo';
 
 import HomeScreen from '../HomeScreen';
 import ExpensesScreen from '../ExpensesScreen';
@@ -39,6 +40,34 @@ const CustomDrawerContentComponent = props => (
         style={{ backgroundColor: '#000' }}
         labelStyle={{ fontSize: 18, textTransform: 'uppercase', fontFamily: circularBlack }}
       />
+      <View>
+        <Text
+          onPress={() => {
+            SecureStore.getItemAsync('userToken').then(res => {
+              Alert.alert(
+                'Wut?',
+                `Are you sure you want to delete ${res}?`,
+                [
+                  {
+                    text: 'Cancel',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel'
+                  },
+                  {
+                    text: 'OK',
+                    onPress: () => {
+                      SecureStore.deleteItemAsync('userToken').then(() => props.navigation.navigate('Auth'));
+                    }
+                  }
+                ],
+                { cancelable: false }
+              );
+            });
+          }}
+        >
+          LOG OUT
+        </Text>
+      </View>
     </SafeAreaView>
   </ScrollView>
 );
