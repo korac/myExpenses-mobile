@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, View, AsyncStorage } from 'react-native';
-// import AsyncStorage from '@react-native-community/async-storage';
+import { ActivityIndicator, View } from 'react-native';
+import { SecureStore } from 'expo';
 
 import styles from './AuthLoadingScreen.styles';
 
@@ -8,17 +8,24 @@ class AuthLoadingScreen extends Component {
   constructor(props) {
     super(props);
 
-    this._bootstrapAsync();
+    // this._bootstrapAsync();
   }
 
-  // Fetch the token from storage then navigate to our appropriate place
-  _bootstrapAsync = async () => {
-    const userToken = await AsyncStorage.getItem('userToken');
+  componentDidMount() {
+    SecureStore.getItemAsync('userToken').then(res => {
+      this.props.navigation.navigate(res ? 'App' : 'Auth');
+    });
+  }
 
-    // This will switch to the App screen or Auth screen and this loading
-    // screen will be unmounted and thrown away.
-    this.props.navigation.navigate(userToken ? 'App' : 'Auth');
-  };
+  // _bootstrapAsync = async () => {
+  //   const userToken = await SecureStore.getItemAsync('userToken');
+  //
+  //   console.log(userToken);
+  //
+  //   // This will switch to the App screen or Auth screen and this loading
+  //   // screen will be unmounted and thrown away.
+  //   this.props.navigation.navigate(userToken ? 'App' : 'Auth');
+  // };
 
   render() {
     return (

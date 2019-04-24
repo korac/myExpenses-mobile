@@ -6,7 +6,6 @@
   "author": "MyExpenses <korac.kristijan@gmail.com>",
   "main": "node_modules/expo/AppEntry.js",
   "dependencies": {
-    "@react-native-community/async-storage": "^1.2.4",
     "axios": "^0.18.0",
     "expo": "^31.0.2",
     "moment": "^2.24.0",

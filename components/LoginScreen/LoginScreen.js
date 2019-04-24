@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { SecureStore } from 'expo';
 
 import { login } from './Login.data';
 import styles, { loginClass } from './LoginScreen.styles';
@@ -18,20 +19,17 @@ class LoginScreen extends Component {
     this.setState({ submitting: true });
     login(email, password)
       .then(res => {
-        console.log(res.data.token);
-        // LocalStorage.setAccessToken(res.data.token);
-        alert('Good!');
-        this.setState({ submitting: false });
+        SecureStore.setItemAsync('userToken', res.data.token).then(() => this.props.navigation.navigate('App'));
       })
-      .catch(() => {
+      .catch(err => {
         alert('There has been an error.');
+        console.log(err.response);
         this.setState({ submitting: false });
       });
   }
 
   render() {
     const { email, password, submitting } = this.state;
-    // const { navigate } = this.props.navigation;
 
     const disabled = !email.length || !password.length;
 
@@ -57,12 +55,12 @@ class LoginScreen extends Component {
         />
         <View style={styles.largeVerticalSeparator} />
         <TouchableOpacity
-          style={loginClass(disabled)}
-          activeOpacity={0.6}
+          style={loginClass(disabled || submitting)}
+          activeOpacity={1}
           disabled={disabled || submitting}
           onPress={this.handleOnLoginPress}
         >
-          <Text style={styles.loginButtonText}>LOG IN</Text>
+          <Text style={styles.loginButtonText}>{submitting ? 'LOGGING IN...' : 'LOG IN'}</Text>
         </TouchableOpacity>
       </View>
     );
