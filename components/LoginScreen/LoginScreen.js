@@ -3,7 +3,7 @@ import { Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { SecureStore } from 'expo';
 
 import { login } from './Login.data';
-import styles, { loginClass } from './LoginScreen.styles';
+import styles, { buttonClass } from './LoginScreen.styles';
 
 class LoginScreen extends Component {
   constructor(props) {
@@ -11,6 +11,17 @@ class LoginScreen extends Component {
 
     this.handleOnLoginPress = this.handleOnLoginPress.bind(this);
     this.state = { email: '', password: '', submitting: false };
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { navigation } = this.props;
+
+    const email = navigation.getParam('email', null);
+    const password = navigation.getParam('password', null);
+
+    if (email && password && email !== prevState.email && password !== prevState.password) {
+      this.setState({ email, password });
+    }
   }
 
   handleOnLoginPress() {
@@ -30,6 +41,9 @@ class LoginScreen extends Component {
 
   render() {
     const { email, password, submitting } = this.state;
+    const {
+      navigation: { navigate }
+    } = this.props;
 
     const disabled = !email.length || !password.length;
 
@@ -53,9 +67,15 @@ class LoginScreen extends Component {
           placeholder="Password"
           secureTextEntry={true}
         />
+        <View style={styles.verticalSeparator} />
+        <View>
+          <Text style={styles.newMember} onPress={() => navigate('Register')}>
+            New Member?
+          </Text>
+        </View>
         <View style={styles.largeVerticalSeparator} />
         <TouchableOpacity
-          style={loginClass(disabled || submitting)}
+          style={buttonClass(disabled || submitting)}
           activeOpacity={1}
           disabled={disabled || submitting}
           onPress={this.handleOnLoginPress}

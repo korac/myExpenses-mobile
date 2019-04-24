@@ -2,9 +2,16 @@ import { createSwitchNavigator, createStackNavigator, createAppContainer } from 
 
 import AuthLoadingScreen from './AuthLoadingScreen';
 import AppNavigator from './App/AppNavigator';
-import LoginScreen from './LoginScreen/LoginScreen';
+import LoginScreen from './LoginScreen';
+import RegisterScreen from './RegisterScreen';
 
-const AuthStack = createStackNavigator({ Login: { screen: LoginScreen } }, { headerMode: 'none' });
+const AuthStack = createStackNavigator(
+  {
+    Login: { screen: LoginScreen },
+    Register: { screen: RegisterScreen }
+  },
+  { headerMode: 'none' }
+);
 
 const AuthContainer = createAppContainer(
   createSwitchNavigator(

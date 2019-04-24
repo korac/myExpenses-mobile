@@ -1,9 +1,9 @@
 import { StyleSheet } from 'react-native';
 
-import { bold, myExpensesPurple, semibold } from '../../assets/shared-styles/general';
+import { bold, myExpensesPurple } from '../../assets/shared-styles/general';
 
 const styles = StyleSheet.create({
-  loginContainer: {
+  registerContainer: {
     flex: 1,
     justifyContent: 'center',
     backgroundColor: myExpensesPurple,
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   largeVerticalSeparator: {
     flex: 1
   },
-  loginWrapper: {
+  registerWrapper: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: '#fff'
   },
-  loginButtonText: {
+  registerButtonText: {
     color: myExpensesPurple,
     fontSize: 14
   }
@@ -53,9 +53,9 @@ const styles = StyleSheet.create({
 
 export const buttonClass = disabled => {
   return disabled
-    ? { ...styles.loginWrapper, backgroundColor: 'rgba(255, 255, 255, 0.2)' }
+    ? { ...styles.registerWrapper, backgroundColor: 'rgba(255, 255, 255, 0.2)' }
     : {
-        ...styles.loginWrapper,
+        ...styles.registerWrapper,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 1 },
         shadowOpacity: 0.8,
