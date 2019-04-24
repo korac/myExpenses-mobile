@@ -8,7 +8,6 @@ npm-debug.*
 
 # misc
 .DS_Store
-.env
 .env.local
 .env.development.local
 .env.test.local
@@ -21,9 +20,3 @@ npm-debug.*
 
 # Ignoring fonts
 **/fonts/
-
-# Design assets
-design_assets/
-
-# Keystores
-.keystores

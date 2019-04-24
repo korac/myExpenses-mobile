@@ -1,23 +1,20 @@
 {
   "expo": {
-    "name": "MyExpenses",
+    "name": "myExpenses-mobile",
     "slug": "myExpenses-mobile",
-    "icon": "./assets/images/icon.png",
-    "version": "1.0.0",
     "privacy": "public",
-    "githubUrl": "https://github.com/korac/myExpenses-mobile",
     "sdkVersion": "31.0.0",
-    "entryPoint": "./components/App/index",
     "platforms": [
       "ios",
       "android"
     ],
+    "version": "1.0.0",
     "orientation": "portrait",
-    "primaryColor": "#633147",
+    "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#633147"
+      "backgroundColor": "#ffffff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -26,11 +23,7 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.mobile.myexpenses"
-    },
-    "android": {
-      "package": "com.mobile.myexpenses"
+      "supportsTablet": true
     }
   }
 }
