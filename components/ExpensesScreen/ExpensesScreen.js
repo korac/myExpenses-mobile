@@ -3,10 +3,20 @@ import { Text, View, TouchableHighlight, FlatList } from 'react-native';
 import moment from 'moment';
 import { Ionicons } from '@expo/vector-icons';
 
-import { expenses } from './Expenses.data';
+import { getExpenses } from './Expenses.data';
 import styles from './ExpensesScreen.styles';
 
 class ExpensesScreen extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { expenses: [] };
+  }
+
+  componentDidMount() {
+    getExpenses().then(expenses => this.setState({ expenses }));
+  }
+
   static navigationOptions({ navigation }) {
     return {
       title: 'Expenses',
@@ -21,6 +31,10 @@ class ExpensesScreen extends Component {
         />
       )
     };
+  }
+
+  static sortExpenses(expenses) {
+    return expenses.sort((prev, next) => (prev.date < next.date ? 1 : -1));
   }
 
   renderExpenseItem(item) {
@@ -40,10 +54,12 @@ class ExpensesScreen extends Component {
   }
 
   render() {
+    const sortedExpenses = ExpensesScreen.sortExpenses(this.state.expenses);
+
     return (
       <View style={styles.appContainer}>
         <FlatList
-          data={expenses}
+          data={sortedExpenses}
           renderItem={({ item }) => this.renderExpenseItem(item)}
           keyExtractor={item => item.id.toString()}
         />

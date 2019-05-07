@@ -1,14 +1,18 @@
 import axios from 'axios';
 import Config from 'react-native-config';
+import { SecureStore } from 'expo';
 
 const instance = axios.create({
-  baseURL: Config.API_ENDPOINT
+  // Config.API_ENDPOINT should be here (now is undefined - why?)
+  baseURL: 'https://young-falls-56718.herokuapp.com/api/v1'
 });
 
 instance.interceptors.request.use(
-  async function(config) {
-    config.headers.authorization = await AsyncStorage.getItem('userToken');
-    return config;
+  function(config) {
+    return SecureStore.getItemAsync('userToken').then(userToken => {
+      config.headers['Authorization'] = `Bearer ${userToken}`;
+      return Promise.resolve(config);
+    });
   },
   function(error) {
     return Promise.reject(error);
@@ -24,12 +28,12 @@ instance.interceptors.response.use(
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx
       if (error.response.status === 401) {
-        redirectToLogin();
+        // redirectToLogin();
       } else if (error.response.status === 403) {
-        redirectToUnauthorized();
+        // redirectToUnauthorized();
       } else if (error.response.status === 403 && error.response.data.detail.match('CSRF Failed')) {
         // Redirect to login, to fix csrf token issues
-        redirectToLogin(true);
+        // redirectToLogin(true);
       }
     } else if (error.request) {
       // The request was made but no response was received
