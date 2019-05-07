@@ -10,7 +10,8 @@ class ExpensesScreen extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { expenses: [] };
+    this.handleOnRefresh = this.handleOnRefresh.bind(this);
+    this.state = { expenses: [], refreshing: false };
   }
 
   componentDidMount() {
@@ -35,6 +36,12 @@ class ExpensesScreen extends Component {
 
   static sortExpenses(expenses) {
     return expenses.sort((prev, next) => (prev.date < next.date ? 1 : -1));
+  }
+
+  handleOnRefresh() {
+    getExpenses().then(expenses => {
+      this.setState({ expenses });
+    });
   }
 
   renderExpenseItem(item) {
@@ -62,8 +69,10 @@ class ExpensesScreen extends Component {
           data={sortedExpenses}
           renderItem={({ item }) => this.renderExpenseItem(item)}
           keyExtractor={item => item.id.toString()}
+          refreshing={this.state.refreshing}
+          onRefresh={this.handleOnRefresh}
         />
-        <TouchableHighlight style={styles.fab} onPress={() => this.props.navigation.openDrawer()}>
+        <TouchableHighlight style={styles.fab} onPress={() => this.props.navigation.navigate('NewExpense')}>
           <Ionicons name="ios-add" size={32} color="#fff" />
         </TouchableHighlight>
       </View>
