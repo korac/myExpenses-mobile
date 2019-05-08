@@ -5,6 +5,7 @@ import { SecureStore } from 'expo';
 
 import HomeScreen from '../HomeScreen';
 import ExpensesScreen from '../ExpensesScreen';
+import NewExpenseScreen from '../ExpensesScreen/NewExpenseScreen';
 import CategoriesScreen from '../CategoriesScreen';
 import { myExpensesPurple } from '../../assets/shared-styles/general';
 import { circularBlack } from '../../assets/shared-styles/general';
@@ -24,7 +25,13 @@ const navigatorOptions = {
 
 const HomeNavigator = createStackNavigator({ Home: HomeScreen }, { ...navigatorOptions });
 
-const ExpensesNavigator = createStackNavigator({ Expenses: ExpensesScreen }, { ...navigatorOptions });
+const ExpensesNavigator = createStackNavigator(
+  {
+    Expenses: ExpensesScreen,
+    NewExpense: NewExpenseScreen
+  },
+  { ...navigatorOptions }
+);
 
 const CategoriesNavigator = createStackNavigator({ Categories: CategoriesScreen }, { ...navigatorOptions });
 
