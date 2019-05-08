@@ -48,7 +48,7 @@ class NewExpenseScreen extends Component {
   }
 
   componentDidMount() {
-    this.setState();
+    this.setState({ expenseCategory: mockCategories[0].id });
   }
 
   static navigationOptions({ navigation }) {
