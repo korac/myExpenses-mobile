@@ -146,7 +146,6 @@ class NewExpenseScreen extends Component {
             onChangeText={expenseDescription => this.setState({ expenseDescription })}
             value={expenseDescription}
             multiline={true}
-            numberOfLines={5}
             scrollEnabled
             maxHeight={100}
           />

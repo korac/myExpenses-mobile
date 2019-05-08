@@ -1,6 +1,8 @@
-import { get } from '../../http';
+import { get, remove } from '../../http';
 
 export const getExpenses = () => get('/expenses');
+
+export const deleteExpense = id => remove(`/expenses/${id}`);
 
 // export const expenses = [
 //   {
