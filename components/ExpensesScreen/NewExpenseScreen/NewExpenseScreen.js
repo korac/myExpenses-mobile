@@ -42,7 +42,7 @@ class NewExpenseScreen extends Component {
       expenseAmount: '',
       expenseCategory: '',
       expenseDescription: '',
-      expenseDate: moment(new Date()),
+      expenseDate: moment().toDate(),
       submitting: false
     };
   }
@@ -84,10 +84,16 @@ class NewExpenseScreen extends Component {
       const { action, year, month, day } = await DatePickerAndroid.open({
         // Use `new Date()` for current date.
         // May 25 2020. Month 0 is January.
-        date: this.state.expenseDate.toDate()
+        date: this.state.expenseDate
       });
       if (action !== DatePickerAndroid.dismissedAction) {
-        this.setState({ expenseDate: moment(new Date(year, month, day)) });
+        this.setState({
+          expenseDate: moment()
+            .year(year)
+            .month(month)
+            .date(day)
+            .toDate()
+        });
       }
     } catch ({ code, message }) {
       console.warn('Cannot open date picker', message);
@@ -129,7 +135,7 @@ class NewExpenseScreen extends Component {
         <View style={styles.fieldWrapper}>
           <Text style={styles.fieldName}>EXPENSE DATE</Text>
           <Text style={styles.fieldDatepicker} onPress={this.onDatePickerPress}>
-            {expenseDate.format('MMM D, YYYY')}
+            {moment(expenseDate).format('MMM D, YYYY')}
           </Text>
         </View>
         <View style={styles.verticalSeparator} />
