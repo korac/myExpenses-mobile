@@ -54,14 +54,18 @@ class ExpensesScreen extends Component {
   }
 
   handleOnExpenseItemLongPress(expense) {
-    Alert.alert('Delete', `Are you sure you want to delete expense of ${expense.amount} HRK?`, [
-      {
-        text: 'Cancel',
-        onPress: () => console.log('Cancel Pressed'),
-        style: 'cancel'
-      },
-      { text: 'OK', onPress: () => this.onExpenseDelete(expense.id) }
-    ]);
+    Alert.alert(
+      'Delete',
+      `Are you sure you want to delete expense of ${expense.amount} HRK? \n Spent on: ${expense.description}`,
+      [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel'
+        },
+        { text: 'OK', onPress: () => this.onExpenseDelete(expense.id) }
+      ]
+    );
   }
 
   renderExpenseItem(expense) {
