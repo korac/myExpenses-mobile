@@ -11,11 +11,11 @@ class ExpensesScreen extends Component {
     super(props);
 
     this.handleOnRefresh = this.handleOnRefresh.bind(this);
-    this.state = { expenses: [], refreshing: false };
+    this.state = { expenses: [], refreshing: true };
   }
 
   componentDidMount() {
-    getExpenses().then(expenses => this.setState({ expenses }));
+    getExpenses().then(expenses => this.setState({ expenses, refreshing: false }));
   }
 
   static navigationOptions({ navigation }) {

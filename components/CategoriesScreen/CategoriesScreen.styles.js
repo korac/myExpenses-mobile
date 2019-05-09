@@ -12,10 +12,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderBottomColor: 'rgba(0, 0, 0, 0.1)',
     borderBottomWidth: 1,
-    paddingTop: 12,
-    paddingBottom: 12,
-    paddingLeft: 14,
-    paddingRight: 14
+    padding: 14
   },
   categoryName: {
     fontSize: 24
