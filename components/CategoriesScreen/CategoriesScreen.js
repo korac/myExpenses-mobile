@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { FlatList, Text, TouchableHighlight, View } from 'react-native';
+import { Alert, FlatList, Text, TouchableHighlight, TouchableNativeFeedback, View } from 'react-native';
 
-import { getCategories } from '../CategoriesScreen/Categories.data';
+import { getCategories, deleteCategory } from '../CategoriesScreen/Categories.data';
 import { Ionicons } from '@expo/vector-icons';
 import styles from './CategoriesScreen.styles';
 
@@ -33,17 +33,38 @@ class CategoriesScreen extends Component {
     };
   }
 
+  onCategoryDelete(categoryId) {
+    deleteCategory(categoryId)
+      .then(() => {
+        const newCategories = this.state.categories.filter(category => category.id !== categoryId);
+        this.setState({ categories: newCategories });
+      })
+      .catch(() => alert('Delete category failed.'));
+  }
+
   handleOnRefresh() {
     getCategories().then(categories => {
       this.setState({ categories });
     });
   }
 
-  renderCategoryItem(item) {
+  handleOnExpenseItemLongPress(category) {
+    Alert.alert('Delete', `Are you sure you want to delete "${category.name}" category?`, [
+      {
+        text: 'Cancel',
+        style: 'cancel'
+      },
+      { text: 'OK', onPress: () => this.onCategoryDelete(category.id) }
+    ]);
+  }
+
+  renderCategoryItem(category) {
     return (
-      <View style={styles.categoryItem}>
-        <Text style={styles.categoryName}>{item.name}</Text>
-      </View>
+      <TouchableNativeFeedback onLongPress={this.handleOnExpenseItemLongPress.bind(this, category)}>
+        <View style={styles.categoryItem}>
+          <Text style={styles.categoryName}>{category.name}</Text>
+        </View>
+      </TouchableNativeFeedback>
     );
   }
 
