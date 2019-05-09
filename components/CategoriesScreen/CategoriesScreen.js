@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, FlatList, Text, TouchableHighlight, View } from 'react-native';
+import { FlatList, Text, TouchableHighlight, View } from 'react-native';
 
 import { getCategories } from '../CategoriesScreen/Categories.data';
 import { Ionicons } from '@expo/vector-icons';
-import { myExpensesPurple } from '../../assets/shared-styles/general';
 import styles from './CategoriesScreen.styles';
 
 class CategoriesScreen extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { categories: [], loading: true };
+    this.handleOnRefresh = this.handleOnRefresh.bind(this);
+    this.state = { categories: [], refreshing: true };
   }
 
   componentDidMount() {
-    getCategories().then(categories => this.setState({ categories, loading: false }));
+    getCategories().then(categories => this.setState({ categories, refreshing: false }));
   }
 
   static navigationOptions({ navigation }) {
@@ -33,6 +33,12 @@ class CategoriesScreen extends Component {
     };
   }
 
+  handleOnRefresh() {
+    getCategories().then(categories => {
+      this.setState({ categories });
+    });
+  }
+
   renderCategoryItem(item) {
     return (
       <View style={styles.categoryItem}>
@@ -42,20 +48,18 @@ class CategoriesScreen extends Component {
   }
 
   render() {
-    const { categories, loading } = this.state;
+    const { categories } = this.state;
 
     return (
       <View style={styles.appContainer}>
-        {loading ? (
-          <ActivityIndicator size="large" color={myExpensesPurple} />
-        ) : (
-          <FlatList
-            data={categories.sort((a, b) => a.name > b.name)}
-            renderItem={({ item }) => this.renderCategoryItem(item)}
-            keyExtractor={item => item.id.toString()}
-          />
-        )}
-        <TouchableHighlight style={styles.fab} onPress={() => this.props.navigation.openDrawer()}>
+        <FlatList
+          data={categories.sort((a, b) => a.name > b.name)}
+          renderItem={({ item }) => this.renderCategoryItem(item)}
+          keyExtractor={item => item.id.toString()}
+          refreshing={this.state.refreshing}
+          onRefresh={this.handleOnRefresh}
+        />
+        <TouchableHighlight style={styles.fab} onPress={() => this.props.navigation.navigate('NewCategory')}>
           <Ionicons name="ios-add" size={32} color="#fff" />
         </TouchableHighlight>
       </View>

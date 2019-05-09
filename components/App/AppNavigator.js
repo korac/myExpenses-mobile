@@ -7,6 +7,7 @@ import HomeScreen from '../HomeScreen';
 import ExpensesScreen from '../ExpensesScreen';
 import NewExpenseScreen from '../ExpensesScreen/NewExpenseScreen';
 import CategoriesScreen from '../CategoriesScreen';
+import NewCategoryScreen from '../CategoriesScreen/NewCategoryScreen/NewCategoryScreen';
 import { myExpensesPurple } from '../../assets/shared-styles/general';
 import { circularBlack } from '../../assets/shared-styles/general';
 import styles from './App.styles';
@@ -33,7 +34,13 @@ const ExpensesNavigator = createStackNavigator(
   { ...navigatorOptions }
 );
 
-const CategoriesNavigator = createStackNavigator({ Categories: CategoriesScreen }, { ...navigatorOptions });
+const CategoriesNavigator = createStackNavigator(
+  {
+    Categories: CategoriesScreen,
+    NewCategory: NewCategoryScreen
+  },
+  { ...navigatorOptions }
+);
 
 const CustomDrawerContentComponent = props => (
   <ScrollView style={styles.drawerScrollView}>

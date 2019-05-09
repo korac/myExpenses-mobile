@@ -1,8 +1,6 @@
-import Expo, { Font } from 'expo';
+import * as Expo from 'expo';
 import React, { Component } from 'react';
-import { createAppContainer } from 'react-navigation';
 
-import AppNavigator from './AppNavigator';
 import AuthContainer from '../AuthNavigator';
 
 // const AppContainer = createAppContainer(AppNavigator);
@@ -15,7 +13,7 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    await Font.loadAsync({
+    await Expo.Font.loadAsync({
       'circular-black': require('../../assets/fonts/Circular-Black.ttf'),
       'circular-black-italic': require('../../assets/fonts/Circular-BlackItalic.ttf'),
       'circular-bold': require('../../assets/fonts/Circular-Bold.ttf'),
