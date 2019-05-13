@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Alert, FlatList, Text, TouchableHighlight, TouchableNativeFeedback, View } from 'react-native';
+import { connect } from 'react-redux';
 
+import { setCategories, removeCategory } from '../../actions/categories.actions';
 import { getCategories, deleteCategory } from '../CategoriesScreen/Categories.data';
 import { Ionicons } from '@expo/vector-icons';
 import styles from './CategoriesScreen.styles';
@@ -10,11 +12,7 @@ class CategoriesScreen extends Component {
     super(props);
 
     this.handleOnRefresh = this.handleOnRefresh.bind(this);
-    this.state = { categories: [], refreshing: true };
-  }
-
-  componentDidMount() {
-    getCategories().then(categories => this.setState({ categories, refreshing: false }));
+    this.state = { refreshing: false };
   }
 
   static navigationOptions({ navigation }) {
@@ -35,17 +33,15 @@ class CategoriesScreen extends Component {
 
   onCategoryDelete(categoryId) {
     deleteCategory(categoryId)
-      .then(() => {
-        const newCategories = this.state.categories.filter(category => category.id !== categoryId);
-        this.setState({ categories: newCategories });
-      })
-      .catch(() => alert('Delete category failed.'));
+      .then(() => this.props.removeCategory(categoryId))
+      .catch(err => {
+        console.log(err);
+        alert('Delete category failed.');
+      });
   }
 
   handleOnRefresh() {
-    getCategories().then(categories => {
-      this.setState({ categories });
-    });
+    getCategories().then(res => this.props.setCategories(res));
   }
 
   handleOnExpenseItemLongPress(category) {
@@ -69,7 +65,7 @@ class CategoriesScreen extends Component {
   }
 
   render() {
-    const { categories } = this.state;
+    const { categories } = this.props;
 
     return (
       <View style={styles.appContainer}>
@@ -87,5 +83,12 @@ class CategoriesScreen extends Component {
     );
   }
 }
+
+const mapStateToProps = ({ categories }) => ({ categories });
+
+CategoriesScreen = connect(
+  mapStateToProps,
+  { setCategories, removeCategory }
+)(CategoriesScreen);
 
 export default CategoriesScreen;

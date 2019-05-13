@@ -27,6 +27,9 @@ const styles = StyleSheet.create({
     color: black3,
     fontSize: 16
   },
+  expenseCategory: {
+    justifyContent: 'flex-end'
+  },
   fab: {
     display: 'flex',
     alignItems: 'center',
