@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, TouchableHighlight, TouchableNativeFeedback, FlatList, Alert } from 'react-native';
 import moment from 'moment';
 import { Ionicons } from '@expo/vector-icons';
+import { connect } from 'react-redux';
 
 import { getExpenses, deleteExpense } from './Expenses.data';
 import styles from './ExpensesScreen.styles';
@@ -68,6 +69,8 @@ class ExpensesScreen extends Component {
   }
 
   renderExpenseItem(expense) {
+    const expenseCategory = this.props.categories.find(category => category.id === expense.expense_category_id);
+
     return (
       <TouchableNativeFeedback onLongPress={this.handleOnExpenseItemLongPress.bind(this, expense)}>
         <View style={styles.expenseItem}>
@@ -78,7 +81,7 @@ class ExpensesScreen extends Component {
             <Text style={styles.expenseDate}>{moment(expense.date).format('DD MMM YYYY')}</Text>
           </View>
           <View style={styles.expenseCategory}>
-            <Text>{expense.expense_category_id}</Text>
+            <Text>{expenseCategory.name}</Text>
           </View>
         </View>
       </TouchableNativeFeedback>
@@ -104,5 +107,9 @@ class ExpensesScreen extends Component {
     );
   }
 }
+
+const mapStateToProps = ({ categories }) => ({ categories });
+
+ExpensesScreen = connect(mapStateToProps)(ExpensesScreen);
 
 export default ExpensesScreen;

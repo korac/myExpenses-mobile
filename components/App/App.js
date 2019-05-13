@@ -1,9 +1,9 @@
 import * as Expo from 'expo';
 import React, { Component } from 'react';
+import { Provider } from 'react-redux';
 
+import store from '../../store';
 import AuthContainer from '../AuthNavigator';
-
-// const AppContainer = createAppContainer(AppNavigator);
 
 class App extends Component {
   constructor(props) {
@@ -30,7 +30,11 @@ class App extends Component {
   render() {
     const { fontLoaded } = this.state;
 
-    return fontLoaded ? <AuthContainer /> : null;
+    return fontLoaded ? (
+      <Provider store={store}>
+        <AuthContainer />
+      </Provider>
+    ) : null;
   }
 }
 
