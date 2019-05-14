@@ -21,7 +21,7 @@ class Drawer extends Component {
           </View>
           <View style={styles.navSectionStyle}>
             <TouchableNativeFeedback onPress={this.navigateToScreen.bind(this, 'Expenses')}>
-              <Text style={styles.navItemStyle}>EXPENSE</Text>
+              <Text style={styles.navItemStyle}>EXPENSES</Text>
             </TouchableNativeFeedback>
             <TouchableNativeFeedback onPress={this.navigateToScreen.bind(this, 'Categories')}>
               <Text style={styles.navItemStyle}>CATEGORIES</Text>
