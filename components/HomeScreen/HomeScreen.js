@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Button, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-import { myExpensesPurple } from '../../assets/shared-styles/general';
 import styles from './HomeScreen.styles';
 
 class HomeScreen extends Component {
@@ -23,16 +22,10 @@ class HomeScreen extends Component {
   }
 
   render() {
-    const { navigate } = this.props.navigation;
-
     return (
       <View style={styles.container}>
-        <Button
-          style={styles.button}
-          color={myExpensesPurple}
-          title="Expenses"
-          onPress={() => navigate('Expenses', { name: 'Jane Expense' })}
-        />
+        <Text style={styles.homeText}>Dashboard screen in development.</Text>
+        <Text style={styles.homeText}>Check out for Expenses and Categories screens.</Text>
       </View>
     );
   }

@@ -1,36 +1,10 @@
 import React, { Component } from 'react';
 import { Text, TextInput, View, Picker, TouchableOpacity, DatePickerAndroid } from 'react-native';
 import moment from 'moment';
+import { connect } from 'react-redux';
 
 import { createExpense } from './NewExpense.data';
 import styles, { buttonClass } from './NewExpenseScreen.styles';
-
-const mockCategories = [
-  {
-    id: 1,
-    name: 'Other'
-  },
-  {
-    id: 2,
-    name: 'Računi'
-  },
-  {
-    id: 3,
-    name: 'Razno'
-  },
-  {
-    id: 4,
-    name: 'Hrana'
-  },
-  {
-    id: 5,
-    name: 'Auto'
-  },
-  {
-    id: 14,
-    name: 'Prijevoz'
-  }
-];
 
 class NewExpenseScreen extends Component {
   constructor(props) {
@@ -48,7 +22,7 @@ class NewExpenseScreen extends Component {
   }
 
   componentDidMount() {
-    this.setState({ expenseCategory: mockCategories[0].id });
+    this.setState({ expenseCategory: this.props.categories[0].id });
   }
 
   static navigationOptions({ navigation }) {
@@ -82,8 +56,6 @@ class NewExpenseScreen extends Component {
   async onDatePickerPress() {
     try {
       const { action, year, month, day } = await DatePickerAndroid.open({
-        // Use `new Date()` for current date.
-        // May 25 2020. Month 0 is January.
         date: this.state.expenseDate
       });
       if (action !== DatePickerAndroid.dismissedAction) {
@@ -101,6 +73,7 @@ class NewExpenseScreen extends Component {
   }
 
   render() {
+    const { categories } = this.props;
     const { expenseAmount, expenseCategory, expenseDescription, expenseDate, submitting } = this.state;
 
     const disabled =
@@ -126,7 +99,7 @@ class NewExpenseScreen extends Component {
             selectedValue={expenseCategory}
             onValueChange={expenseCategory => this.setState({ expenseCategory })}
           >
-            {mockCategories.map(category => (
+            {categories.map(category => (
               <Picker.Item color="#404040" label={category.name} value={category.id} key={category.id} />
             ))}
           </Picker>
@@ -163,5 +136,9 @@ class NewExpenseScreen extends Component {
     );
   }
 }
+
+const mapStateToProps = ({ categories }) => ({ categories });
+
+NewExpenseScreen = connect(mapStateToProps)(NewExpenseScreen);
 
 export default NewExpenseScreen;

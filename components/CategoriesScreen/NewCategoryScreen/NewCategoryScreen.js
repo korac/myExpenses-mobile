@@ -12,6 +12,12 @@ class NewCategoryScreen extends Component {
     this.state = { categoryName: '' };
   }
 
+  static navigationOptions({ navigation }) {
+    return {
+      title: 'New Category'
+    };
+  }
+
   handleOnAddPress() {
     const { categoryName } = this.state;
 
