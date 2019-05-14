@@ -14,8 +14,14 @@ class AuthLoadingScreen extends Component {
 
   componentDidMount() {
     SecureStore.getItemAsync('userToken').then(res => {
-      getCategories().then(res => this.props.setCategories(res));
-      this.props.navigation.navigate(res ? 'App' : 'Auth');
+      if (res) {
+        getCategories().then(res => {
+          this.props.setCategories(res);
+          this.props.navigation.navigate('App');
+        });
+      } else {
+        this.props.navigation.navigate('Auth');
+      }
     });
   }
 

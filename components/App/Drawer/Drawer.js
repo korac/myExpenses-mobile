@@ -32,26 +32,24 @@ class Drawer extends Component {
           <Text
             style={styles.drawerFooterText}
             onPress={() => {
-              SecureStore.getItemAsync('userToken').then(res => {
-                Alert.alert(
-                  'Logout',
-                  `Are you sure you want to log out?`,
-                  [
-                    {
-                      text: 'Cancel',
-                      onPress: () => console.log('Cancel Pressed'),
-                      style: 'cancel'
-                    },
-                    {
-                      text: 'OK',
-                      onPress: () => {
-                        SecureStore.deleteItemAsync('userToken').then(() => props.navigation.navigate('Auth'));
-                      }
+              Alert.alert(
+                'Logout',
+                'Are you sure you want to log out?',
+                [
+                  {
+                    text: 'Cancel',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel'
+                  },
+                  {
+                    text: 'OK',
+                    onPress: () => {
+                      SecureStore.deleteItemAsync('userToken').then(() => this.props.navigation.navigate('Auth'));
                     }
-                  ],
-                  { cancelable: false }
-                );
-              });
+                  }
+                ],
+                { cancelable: false }
+              );
             }}
           >
             LOG OUT
