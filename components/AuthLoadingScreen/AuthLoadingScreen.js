@@ -1,31 +1,33 @@
 import React, { Component } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { SecureStore } from 'expo';
+import { connect } from 'react-redux';
 
+import { getCategories } from '../CategoriesScreen/Categories.data';
+import { setCategories } from '../../actions/categories.actions';
 import styles from './AuthLoadingScreen.styles';
 
 class AuthLoadingScreen extends Component {
   constructor(props) {
     super(props);
-
-    // this._bootstrapAsync();
   }
 
   componentDidMount() {
-    SecureStore.getItemAsync('userToken').then(res => {
-      this.props.navigation.navigate(res ? 'App' : 'Auth');
+    SecureStore.getItemAsync('userToken').then(token => {
+      if (token) {
+        getCategories()
+          .then(res => {
+            this.props.setCategories(res);
+            this.props.navigation.navigate('App');
+          })
+          .catch(() => {
+            this.props.navigation.navigate('Auth');
+          });
+      } else {
+        this.props.navigation.navigate('Auth');
+      }
     });
   }
-
-  // _bootstrapAsync = async () => {
-  //   const userToken = await SecureStore.getItemAsync('userToken');
-  //
-  //   console.log(userToken);
-  //
-  //   // This will switch to the App screen or Auth screen and this loading
-  //   // screen will be unmounted and thrown away.
-  //   this.props.navigation.navigate(userToken ? 'App' : 'Auth');
-  // };
 
   render() {
     return (
@@ -35,5 +37,10 @@ class AuthLoadingScreen extends Component {
     );
   }
 }
+
+AuthLoadingScreen = connect(
+  null,
+  { setCategories }
+)(AuthLoadingScreen);
 
 export default AuthLoadingScreen;

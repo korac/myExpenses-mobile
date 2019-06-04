@@ -1,0 +1,2 @@
+export const SET_CATEGORIES = 'SET_CATEGORIES';
+export const REMOVE_CATEGORY = 'REMOVE_CATEGORY';

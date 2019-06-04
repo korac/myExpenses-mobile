@@ -1,11 +1,9 @@
-import Expo, { Font } from 'expo';
+import * as Expo from 'expo';
 import React, { Component } from 'react';
-import { createAppContainer } from 'react-navigation';
+import { Provider } from 'react-redux';
 
-import AppNavigator from './AppNavigator';
+import store from '../../store';
 import AuthContainer from '../AuthNavigator';
-
-// const AppContainer = createAppContainer(AppNavigator);
 
 class App extends Component {
   constructor(props) {
@@ -15,7 +13,7 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    await Font.loadAsync({
+    await Expo.Font.loadAsync({
       'circular-black': require('../../assets/fonts/Circular-Black.ttf'),
       'circular-black-italic': require('../../assets/fonts/Circular-BlackItalic.ttf'),
       'circular-bold': require('../../assets/fonts/Circular-Bold.ttf'),
@@ -32,7 +30,11 @@ class App extends Component {
   render() {
     const { fontLoaded } = this.state;
 
-    return fontLoaded ? <AuthContainer /> : null;
+    return fontLoaded ? (
+      <Provider store={store}>
+        <AuthContainer />
+      </Provider>
+    ) : null;
   }
 }
 

@@ -27,3 +27,7 @@ design_assets/
 
 # Keystores
 .keystores
+
+# Expo
+.expo/*
+.expo-shared
