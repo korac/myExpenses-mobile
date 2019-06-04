@@ -1,6 +1,8 @@
 # MyExpenses Mobile
 
-:construction: Under active development. Please checkout the `develop` branch for the latest code.
+v1.0 is out! :tada:
+
+:construction: For the latest development code, please checkout the `develop` branch.
 
 ## Prelude
 
